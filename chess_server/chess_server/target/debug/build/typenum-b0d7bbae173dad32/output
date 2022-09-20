@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/momo/Desktop/WMCTF/chess_server/chess_server/target/debug/build/typenum-b0d7bbae173dad32/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/momo/Desktop/WMCTF/chess_server/chess_server/target/debug/build/typenum-b0d7bbae173dad32/out/op.rs

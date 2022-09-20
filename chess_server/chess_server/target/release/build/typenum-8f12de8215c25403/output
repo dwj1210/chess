@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/momo/Desktop/WMCTF/chess_server/chess_server/target/release/build/typenum-8f12de8215c25403/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/momo/Desktop/WMCTF/chess_server/chess_server/target/release/build/typenum-8f12de8215c25403/out/op.rs
